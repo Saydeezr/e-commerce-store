@@ -12,12 +12,15 @@ router.get('/', (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: 'Error retrieving category'
+      message: 'Error retrieving categories'
     })
   })
 });
 
 router.get('/:id', (req, res) => {
+  Category.findOne({
+    include
+  })
   // find one category by its `id` value
   // be sure to include its associated Products
 });
