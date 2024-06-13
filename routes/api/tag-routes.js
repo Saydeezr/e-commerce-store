@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
@@ -37,8 +37,14 @@ router.get('/:id', (req, res) => {
 }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
+  try{
+    const tagData = await Tag.create(req.body);
+    res.status(200).json(tagData);
+  } catch (error) {
+    res.status(404).json(error);
+  }
 });
 
 router.put('/:id', (req, res) => {
